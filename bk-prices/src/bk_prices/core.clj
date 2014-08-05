@@ -7,7 +7,7 @@
     (html/html-resource (java.net.URL. url)))
 
   (defn url-of [symbol]
-    (fetch-url (str "https://www.google.co.uk/finance/historical?p=" symbol)))
+    (fetch-url (str "https://www.google.co.uk/finance/historical?q=" symbol)))
 
   (defn history-of [symbol]
-    (map html/text (html/select (fetch-url (str "https://www.google.co.uk/finance/historical?q=" symbol)) [:td]))))
+    (map html/text (html/select (url-of symbol) [:td]))))

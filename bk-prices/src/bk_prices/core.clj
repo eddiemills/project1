@@ -1,7 +1,6 @@
-(ns bk-prices.core)
-(:gen-class)
-(:require [net.cgrand.enlive-html :as html])
-(:require [clj-http.client :as client])
+(ns bk-prices.core
+  (:require [net.cgrand.enlive-html :as html])
+  (:require [clj-http.client :as client]))
 
 (defn fetch-url [url]
   (html/html-resource (java.net.URL. url)))
@@ -10,4 +9,4 @@
   (fetch-url (str "https://www.google.co.uk/finance/historical?q=" symbol)))
 
 (defn history-of [symbol]
-  (map html/text (html/select (url-of symbol) [:td])))
+  (map html/text (html/select (url-of symbol) #{[:td.lm] [:td.rgt]})))
